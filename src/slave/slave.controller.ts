@@ -1,26 +1,29 @@
 import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
 
+interface ISlave {
+  name: string;
+  email: string;
+}
+
 @Controller('slaves')
-class SlaveController {
+export class SlaveController {
   @Get()
   getSlaves() {
     return 'Slaves';
   }
 
-  @Get('/:id')
-  getSlaveById(@Param() params) {
-    return `Slave ${params.id}`;
+  @Get('/:slaveId')
+  getSlaveById(@Param('slaveId') slaveId: string) {
+    return `Slave #${slaveId}`;
   }
 
   @Post('/create')
-  createSlave(@Body() slave) {
+  createSlave(@Body() slave: ISlave) {
     return slave;
   }
 
-  @Put('/:id')
-  updateSlave(@Body() slave) {
-    return slave;
+  @Put('/:slaveId')
+  updateSlave(@Param('slaveId') slaveId: string, @Body() slave: ISlave) {
+    return `${slaveId}, ${JSON.stringify(slave)}`;
   }
 }
-
-export default SlaveController;
