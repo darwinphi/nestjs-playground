@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MasterController } from './master/master.controller';
 import { SlaveController } from './slave/slave.controller';
 import { SlaveMasterController } from './master/slave.controller';
+import { SlaveService } from './slave/slave.service';
 
 @Module({
   imports: [],
@@ -13,6 +14,6 @@ import { SlaveMasterController } from './master/slave.controller';
     MasterController,
     SlaveMasterController,
   ],
-  providers: [AppService],
+  providers: [AppService, SlaveService],
 })
 export class AppModule {}
