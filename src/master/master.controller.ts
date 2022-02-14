@@ -1,5 +1,10 @@
 import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
 
+interface IMaster {
+  name: string;
+  email: string;
+}
+
 @Controller('masters')
 export class MasterController {
   @Get()
@@ -8,12 +13,12 @@ export class MasterController {
   }
 
   @Get('/:masterId')
-  getMasterById(@Param() params) {
-    return `Master ${params.id}`;
+  getMasterById(@Param('masterId') masterId: string) {
+    return `Master ${masterId}`;
   }
 
   @Post('/create')
-  createMaster(@Body() master) {
+  createMaster(@Body() master: IMaster) {
     return master;
   }
 }
