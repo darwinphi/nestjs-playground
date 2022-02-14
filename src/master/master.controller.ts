@@ -1,24 +1,20 @@
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
-
-interface IMaster {
-  name: string;
-  email: string;
-}
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { CreateMasterDTO, MasterResponseDTO } from './master.dto';
 
 @Controller('masters')
 export class MasterController {
   @Get()
-  getMasters() {
-    return 'Masters';
+  getMasters(): MasterResponseDTO[] {
+    return [{ id: '1', name: 'God' }];
   }
 
   @Get('/:masterId')
-  getMasterById(@Param('masterId') masterId: string) {
-    return `Master ${masterId}`;
+  getMasterById(@Param('masterId') masterId: string): MasterResponseDTO {
+    return { id: masterId, name: 'God' };
   }
 
   @Post('/create')
-  createMaster(@Body() master: IMaster) {
+  createMaster(@Body() master: CreateMasterDTO) {
     return master;
   }
 }

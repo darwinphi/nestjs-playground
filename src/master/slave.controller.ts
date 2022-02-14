@@ -1,17 +1,18 @@
-import { Controller, Get, Put, Param, Body } from '@nestjs/common';
+import { Controller, Get, Put, Param } from '@nestjs/common';
+import { SlaveResponseDTO } from '../slave/slave.dto';
 
 @Controller('masters/:masterId/slaves')
 export class SlaveMasterController {
   @Get()
-  getSlaves(@Param('masterId') masterId: string) {
-    return `Slaves from Master ${masterId}`;
+  getSlaves(@Param('masterId') masterId: string): SlaveResponseDTO[] {
+    return [{ id: '1', name: 'Darwin', master: 'God' }];
   }
 
   @Put('/:slaveId')
   updateSlaveMaster(
     @Param('masterId') masterId: string,
     @Param('slaveId') slaveId: string,
-  ) {
-    return `Update Master #${masterId} Slave #${slaveId}`;
+  ): SlaveResponseDTO {
+    return { id: '1', name: 'Darwin', master: 'God' };
   }
 }
