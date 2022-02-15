@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Param } from '@nestjs/common';
+import { Controller, Get, Put, Param, ParseUUIDPipe } from '@nestjs/common';
 import { SlaveResponseDTO } from '../slave/slave.dto';
 import { SlaveService } from '../slave/slave.service';
 
@@ -7,14 +7,16 @@ export class SlaveMasterController {
   constructor(private slaveService: SlaveService) {}
 
   @Get()
-  getSlaves(@Param('masterId') masterId: string): SlaveResponseDTO[] {
+  getSlaves(
+    @Param('masterId', new ParseUUIDPipe()) masterId: string,
+  ): SlaveResponseDTO[] {
     return this.slaveService.getSlavesByMasterId(masterId);
   }
 
   @Put('/:slaveId')
   updateSlaveMaster(
-    @Param('masterId') masterId: string,
-    @Param('slaveId') slaveId: string,
+    @Param('masterId', new ParseUUIDPipe()) masterId: string,
+    @Param('slaveId', new ParseUUIDPipe()) slaveId: string,
   ): SlaveResponseDTO {
     return this.slaveService.updateSlaveMaster(masterId, slaveId);
   }

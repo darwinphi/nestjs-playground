@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Param,
+  Body,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { CreateSlaveDTO, UpdateSlaveDTO, SlaveResponseDTO } from './slave.dto';
 import { SlaveService } from './slave.service';
 
@@ -12,7 +20,9 @@ export class SlaveController {
   }
 
   @Get('/:slaveId')
-  getSlaveById(@Param('slaveId') slaveId: string): SlaveResponseDTO {
+  getSlaveById(
+    @Param('slaveId', new ParseUUIDPipe()) slaveId: string,
+  ): SlaveResponseDTO {
     return this.slaveService.getSlaveById(slaveId);
   }
 
@@ -22,7 +32,10 @@ export class SlaveController {
   }
 
   @Put('/:slaveId')
-  updateSlave(@Param('slaveId') slaveId: string, @Body() body: UpdateSlaveDTO) {
+  updateSlave(
+    @Param('slaveId', new ParseUUIDPipe()) slaveId: string,
+    @Body() body: UpdateSlaveDTO,
+  ) {
     return this.slaveService.updateSlave(body, slaveId);
   }
 }

@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { CreateMasterDTO, MasterResponseDTO } from './master.dto';
 import { MasterService } from './master.service';
 
@@ -12,7 +19,9 @@ export class MasterController {
   }
 
   @Get('/:masterId')
-  getMasterById(@Param('masterId') masterId: string): MasterResponseDTO {
+  getMasterById(
+    @Param('masterId', new ParseUUIDPipe()) masterId: string,
+  ): MasterResponseDTO {
     return this.masterService.getMasterById(masterId);
   }
 
