@@ -2,27 +2,27 @@ export const slaves = [
   {
     id: '1',
     name: 'Darwin',
-    master: '111-111',
+    master: 'A',
   },
   {
     id: '2',
     name: 'John',
-    master: '111-111',
+    master: 'A',
   },
   {
     id: '3',
     name: 'Jane',
-    master: '666-666',
+    master: 'B',
   },
 ];
 
 export const masters = [
   {
-    id: '111-111',
+    id: 'A',
     name: 'God',
   },
   {
-    id: '666-666',
+    id: 'B',
     name: 'Evil',
   },
 ];

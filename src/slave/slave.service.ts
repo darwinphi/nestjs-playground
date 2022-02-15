@@ -43,4 +43,29 @@ export class SlaveService {
     this.slaves = updatedSlaves;
     return updatedSlave;
   }
+
+  getSlavesByMasterId(masterId: string): SlaveResponseDTO[] {
+    return this.slaves.filter((slave) => {
+      return slave.master === masterId;
+    });
+  }
+
+  updateSlaveMaster(masterId: string, slaveId: string): SlaveResponseDTO {
+    let updatedSlave: SlaveResponseDTO;
+
+    const updatedSlaves = this.slaves.map((slave) => {
+      if (slave.id === slaveId) {
+        updatedSlave = {
+          ...slave,
+          master: masterId,
+        };
+        return updatedSlave;
+      } else {
+        return slave;
+      }
+    });
+
+    this.slaves = updatedSlaves;
+    return updatedSlave;
+  }
 }
